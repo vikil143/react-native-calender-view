@@ -62,7 +62,9 @@ function WeeksComp({ weekContainerStyle, boxSize }: WeeksProps) {
             key={`${item}-${index}`}
             style={[styles.week, { width: boxSize, minHeight: boxSize * 0.8 }]}
           >
-            <Text style={[styles.weekText]}>{item}</Text>
+            <Text style={[styles.weekText, { fontSize: (boxSize * 28) / 100 }]}>
+              {item}
+            </Text>
           </View>
         );
       })}
@@ -108,6 +110,9 @@ function DateComp({
         <Text
           style={[
             styles.date,
+            {
+              fontSize: boxSize * (28 / 100),
+            },
             textStyle,
             notAnCurrentMonth && styles.notCurrentMonthText,
           ]}
@@ -115,7 +120,10 @@ function DateComp({
           {date}
         </Text>
         <View
-          style={[styles.dotContainer, { top: boxSize * 0.5 + 14 / 2 + 5 }]}
+          style={[
+            styles.dotContainer,
+            { top: boxSize * 0.5 + (boxSize * (28 / 100)) / 2 + 5 },
+          ]}
         >
           {showDots &&
             dateData?.events
@@ -126,7 +134,13 @@ function DateComp({
                   <View
                     key={`${item}-${index}`}
                     style={[
-                      styles.dot,
+                      // styles.dot,
+                      {
+                        width: boxSize * (8.5 / 100),
+                        height: boxSize * (8.5 / 100),
+                        borderRadius: boxSize * (8.5 / 100),
+                        marginHorizontal: boxSize * (8.5 / 100) * 0.15,
+                      },
                       { backgroundColor: stored[index] ?? DOTSCOLORS[index] },
                     ]}
                   />
@@ -313,6 +327,7 @@ export interface CalenderProps
     WeekEndColor {
   date?: Date;
   selectedDateColor?: ColorValue;
+  selectedDateStyle?: ViewStyle;
   markedDates?: MarkedDates;
   onDatePress?: (date: Date, events?: string[]) => void;
 }
@@ -323,6 +338,7 @@ export default function MainView({
   containerStyle,
   weekEndColor = '#000',
   markedDates: mD = {},
+  selectedDateStyle,
   dateStyle,
   date,
   onDatePress,
@@ -353,6 +369,7 @@ export default function MainView({
           styles.selectedDate,
           {
             ...selectedDateMD.style,
+            ...selectedDateStyle,
             backgroundColor: selectedDateColor ?? '#ddd',
           },
         ],
@@ -387,16 +404,31 @@ export default function MainView({
         styles.root,
         { height: initLoader ? SIZE * 5 : undefined },
         containerStyle,
+        // To stop force full updates
+        {
+          padding: 0,
+          paddingBottom: 0,
+          paddingEnd: 0,
+          paddingHorizontal: 0,
+          paddingLeft: 0,
+          paddingRight: 0,
+          paddingStart: 0,
+          paddingTop: 0,
+          paddingVertical: 0,
+          width: '100%',
+        },
       ]}
       onLayout={(e) => {
         width.current = e.nativeEvent.layout.width;
         setInitLoader(false);
       }}
     >
+      <View style={[styles.pA5]} />
       <Header
         onPrevPress={preMovingDate}
         onNextPress={nextMovingDate}
         date={movingDate}
+        boxSize={boxSize}
       />
       <View style={{ padding: 5 }} />
       <WeeksComp boxSize={boxSize} weekContainerStyle={weekContainerStyle} />

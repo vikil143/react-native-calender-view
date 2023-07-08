@@ -6,9 +6,13 @@ export default function App() {
   return (
     <SafeAreaView style={[styles.root]}>
       <View style={styles.container}>
-        <View style={{ padding: 10 }} />
+        <View style={{ padding: 20 }} />
         <DateView
-          date={new Date(2023, 11, 1)}
+          containerStyle={{
+            backgroundColor: '#fff',
+            elevation: 5,
+            borderRadius: 10,
+          }}
           onDatePress={(date, events) =>
             console.log('Date Pressed', date, events)
           }
@@ -46,7 +50,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    padding: 10,
+    padding: 20,
   },
   box: {
     width: 60,

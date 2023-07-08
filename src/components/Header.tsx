@@ -7,12 +7,14 @@ import { FULLMONTHS } from '../constants';
 
 interface HeaderProps {
   date: Date;
+  boxSize: number;
   onNextPress: () => void;
   onPrevPress: () => void;
 }
 
 export default function Header({
   date,
+  boxSize,
   onNextPress,
   onPrevPress,
 }: HeaderProps) {
@@ -21,17 +23,23 @@ export default function Header({
       <TouchableOpacity hitSlop={10} onPress={onPrevPress}>
         <View>
           <Image
-            style={[styles.arrow, styles.prev]}
+            style={[
+              { width: (boxSize * 30) / 100, height: (boxSize * 30) / 100 },
+              styles.prev,
+            ]}
             source={AppImages.rightArrow}
           />
         </View>
       </TouchableOpacity>
-      <Text style={[styles.headerText]}>
+      <Text style={[styles.headerText, { fontSize: (boxSize * 35) / 100 }]}>
         {FULLMONTHS[getMonth(date)]} {getFullYear(date)}
       </Text>
       <TouchableOpacity hitSlop={10} onPress={onNextPress}>
         <Image
-          style={[styles.arrow, styles.next]}
+          style={[
+            { width: (boxSize * 30) / 100, height: (boxSize * 30) / 100 },
+            styles.next,
+          ]}
           source={AppImages.rightArrow}
         />
       </TouchableOpacity>
