@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, View, SafeAreaView } from 'react-native';
-import DateView, { getFormattedDDMMYYYY } from 'react-native-date-view';
+import DateView, { getFormattedDDMMYYYY } from 'react-native-calender-view';
 
 export default function App() {
   return (
@@ -8,6 +8,7 @@ export default function App() {
       <View style={styles.container}>
         <View style={{ padding: 10 }} />
         <DateView
+          date={new Date(2023, 11, 1)}
           onDatePress={(date, events) =>
             console.log('Date Pressed', date, events)
           }

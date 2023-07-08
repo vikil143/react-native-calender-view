@@ -396,7 +396,7 @@ export default function MainView({
       <Header
         onPrevPress={preMovingDate}
         onNextPress={nextMovingDate}
-        date={selectedDate}
+        date={movingDate}
       />
       <View style={{ padding: 5 }} />
       <WeeksComp boxSize={boxSize} weekContainerStyle={weekContainerStyle} />

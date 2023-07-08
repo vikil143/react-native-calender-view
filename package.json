@@ -1,5 +1,5 @@
 {
-  "name": "react-native-date-view",
+  "name": "react-native-calender-view",
   "version": "0.1.0",
   "description": "test",
   "main": "lib\\commonjs\\index.js",
@@ -39,15 +39,19 @@
   "keywords": [
     "react-native",
     "ios",
-    "android"
+    "android",
+    "calender",
+    "react-native-calender",
+    "react-native-date-view", 
+    "react-native-date"
   ],
-  "repository": "https://github.com/vikil143/react-native-date-view",
+  "repository": "https://github.com/vikil143/react-native-calender-view",
   "author": "vikil143 <vikil.lakkavatri25@gmail.com> (https://github.com/vikil143)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/vikil143/react-native-date-view/issues"
+    "url": "https://github.com/vikil143/react-native-calender-view/issues"
   },
-  "homepage": "https://github.com/vikil143/react-native-date-view#readme",
+  "homepage": "https://github.com/vikil143/react-native-calender-view#readme",
   "publishConfig": {
     "registry": "https://registry.npmjs.org/"
   },
