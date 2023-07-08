@@ -98,12 +98,12 @@ function DateComp({
       <View
         style={[
           styles.dateContainer,
+          viewStyle,
+          dateStyle,
           {
             width: boxSize,
             minHeight: boxSize,
           },
-          viewStyle,
-          dateStyle,
           notAnCurrentMonth && styles.notCurrentMonth,
         ]}
       >
