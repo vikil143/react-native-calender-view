@@ -1,6 +1,6 @@
 # react-native-calender-view
 
-test
+Calendar UI view for react native apps 
 
 ## Installation
 
