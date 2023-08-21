@@ -330,7 +330,7 @@ export interface CalenderProps
   selectedDateStyle?: ViewStyle;
   markedDates?: MarkedDates;
   onDatePress?: (date: Date, events?: string[]) => void;
-  onMonthChange: () => void;
+  onMonthChange: (date: Date) => void;
 }
 
 export default function MainView({
@@ -343,7 +343,7 @@ export default function MainView({
   dateStyle,
   date,
   onDatePress,
-  onMonthChange
+  onMonthChange,
 }: CalenderProps) {
   const today = new Date();
   const defaultDate = date ?? today;
@@ -379,11 +379,17 @@ export default function MainView({
     };
   }, [selectedDate]);
 
-  const preMovingDate = () =>
+  const preMovingDate = () => {
     setMovingDate(new Date(selectedYear, selectedMonth - 1, 1));
+    typeof onMonthChange === 'function' &&
+      onMonthChange(new Date(selectedYear, selectedMonth - 1, 1));
+  };
 
-  const nextMovingDate = () =>
+  const nextMovingDate = () => {
     setMovingDate(new Date(selectedYear, selectedMonth + 1, 1));
+    typeof onMonthChange === 'function' &&
+      onMonthChange(new Date(selectedYear, selectedMonth + 1, 1));
+  };
 
   const onHandlePrevMonth = (date: number) => {
     setSelectedDate(new Date(selectedYear, selectedMonth - 1, date));
