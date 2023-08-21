@@ -330,6 +330,7 @@ export interface CalenderProps
   selectedDateStyle?: ViewStyle;
   markedDates?: MarkedDates;
   onDatePress?: (date: Date, events?: string[]) => void;
+  onMonthChange: () => void;
 }
 
 export default function MainView({
@@ -342,6 +343,7 @@ export default function MainView({
   dateStyle,
   date,
   onDatePress,
+  onMonthChange
 }: CalenderProps) {
   const today = new Date();
   const defaultDate = date ?? today;
