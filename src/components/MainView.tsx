@@ -330,7 +330,7 @@ export interface CalenderProps
   selectedDateStyle?: ViewStyle;
   markedDates?: MarkedDates;
   onDatePress?: (date: Date, events?: string[]) => void;
-  onMonthChange: (date: Date) => void;
+  onMonthChange?: (date: Date) => void;
 }
 
 export default function MainView({
