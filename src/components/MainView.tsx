@@ -354,29 +354,27 @@ export default function MainView({
   const [initLoader, setInitLoader] = useState(true);
   const [loader, _] = useState(false);
   const width = useRef(SINGLEWEEKS.length);
-  const boxSize = useMemo(
-    () =>
-      PixelRatio.roundToNearestPixel(
-        Math.floor(width.current / SINGLEWEEKS.length)
-      ),
-    [initLoader]
-  );
+  const boxSize = useMemo(() => {
+    console.log('Test', initLoader);
+    return PixelRatio.roundToNearestPixel(
+      Math.floor(width.current / SINGLEWEEKS.length)
+    );
+  }, [initLoader]);
   const markedDates: MarkedDates = useMemo(() => {
     const selectedDateMD = mD[getFormattedDDMMYYYY(selectedDate)] ?? {};
+    const style: ViewStyle = {
+      ...selectedDateMD.style,
+      ...selectedDateStyle,
+      backgroundColor: selectedDateColor ?? '#ddd',
+    };
     return {
       ...mD,
       [getFormattedDDMMYYYY(selectedDate)]: {
         ...selectedDateMD,
-        style: [
-          styles.selectedDate,
-          {
-            ...selectedDateMD.style,
-            ...selectedDateStyle,
-            backgroundColor: selectedDateColor ?? '#ddd',
-          },
-        ],
+        style: [styles.selectedDate, style],
       },
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedDate]);
 
   const preMovingDate = () => {
@@ -391,19 +389,19 @@ export default function MainView({
       onMonthChange(new Date(selectedYear, selectedMonth + 1, 1));
   };
 
-  const onHandlePrevMonth = (date: number) => {
-    setSelectedDate(new Date(selectedYear, selectedMonth - 1, date));
+  const onHandlePrevMonth = (d: number) => {
+    setSelectedDate(new Date(selectedYear, selectedMonth - 1, d));
     preMovingDate();
   };
 
-  const onHandleNextMonth = (date: number) => {
-    setSelectedDate(new Date(selectedYear, selectedMonth + 1, date));
+  const onHandleNextMonth = (d: number) => {
+    setSelectedDate(new Date(selectedYear, selectedMonth + 1, d));
     nextMovingDate();
   };
 
-  const onHandleDatePress = (date: Date, events?: string[]) => {
-    typeof onDatePress === 'function' && onDatePress(date, events);
-    setSelectedDate(date);
+  const onHandleDatePress = (d: Date, events?: string[]) => {
+    typeof onDatePress === 'function' && onDatePress(d, events);
+    setSelectedDate(d);
   };
 
   return (
@@ -413,18 +411,8 @@ export default function MainView({
         { height: initLoader ? SIZE * 5 : undefined },
         containerStyle,
         // To stop force full updates
-        {
-          padding: 0,
-          paddingBottom: 0,
-          paddingEnd: 0,
-          paddingHorizontal: 0,
-          paddingLeft: 0,
-          paddingRight: 0,
-          paddingStart: 0,
-          paddingTop: 0,
-          paddingVertical: 0,
-          width: '100%',
-        },
+        styles.container,
+        styles.padding5,
       ]}
       onLayout={(e) => {
         width.current = e.nativeEvent.layout.width;
@@ -438,7 +426,7 @@ export default function MainView({
         date={movingDate}
         boxSize={boxSize}
       />
-      <View style={{ padding: 5 }} />
+      <View style={[styles.padding5]} />
       <WeeksComp boxSize={boxSize} weekContainerStyle={weekContainerStyle} />
       <Month
         showDots={!initLoader}

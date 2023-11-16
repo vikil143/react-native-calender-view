@@ -2,6 +2,19 @@ import { StyleSheet } from 'react-native';
 import { DOT_SIZE } from '../constants';
 
 export const styles = StyleSheet.create({
+  padding5: { padding: 5 },
+  container: {
+    padding: 0,
+    paddingBottom: 0,
+    paddingEnd: 0,
+    paddingHorizontal: 0,
+    paddingLeft: 0,
+    paddingRight: 0,
+    paddingStart: 0,
+    paddingTop: 0,
+    paddingVertical: 0,
+    width: '100%',
+  },
   pA5: {
     padding: 5,
   },
